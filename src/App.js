@@ -1,11 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Container from "./components/Container";
+import { BaseProvider } from "./context/BaseContext";
+import {Data} from "./data/Data"
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <BaseProvider>
+      <Data />
+      <Container />
+    </BaseProvider>
   );
 }
 
