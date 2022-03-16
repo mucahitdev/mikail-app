@@ -4,19 +4,17 @@ import axios from "axios";
 
 const api = {
   base: "https://api.openweathermap.org/data/2.5",
-  key: "8f1a9e15a4c791939efd13eb99d3ab76",
+  key: process.env.REACT_APP_WEATHER_API_KEY,
   iconUrl: "https://openweathermap.org/img/wn/",
 };
 
-const lang = navigator.language;
 
 export function Data() {
-  const { data, setData, location, isCelcius } = useBaseContext();
+  const { setData, location } = useBaseContext();
 
-  console.log(data);
   useEffect(() => {
     axios(
-      `${api.base}/forecast?q=${location}&units=${isCelcius}&cnt=9&appid=${api.key}&lang=tr`
+      `${api.base}/forecast?q=${location}&units=metric&cnt=9&appid=${api.key}&lang=tr`
     ).then((res) => {
       if (res.data.cod === "200") {
         console.log(res.data.list[0]);
