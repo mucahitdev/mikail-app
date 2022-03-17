@@ -4,8 +4,7 @@ import axios from "axios";
 
 const api = {
   base: "https://api.openweathermap.org/data/2.5",
-  key: process.env.REACT_APP_WEATHER_API_KEY,
-  iconUrl: "https://openweathermap.org/img/wn/",
+  iconUrl: "https://openweathermap.org/img/wn/"
 };
 
 
@@ -14,9 +13,8 @@ export function Data() {
 
   useEffect(() => {
     axios(
-      `${api.base}/forecast?q=${location}&units=metric&cnt=9&appid=${api.key}&lang=tr`
+      `${api.base}/forecast?q=${location}&units=metric&cnt=9&appid=${process.env.REACT_APP_WEATHER_API_KEY}&lang=tr`
     ).then((res) => {
-      if (res.data.cod === "200") {
         console.log(res.data.list[0]);
         let result = res.data;
         setData({
@@ -32,10 +30,12 @@ export function Data() {
           icon: result.list[0].weather[0].icon,
           feelsLike: result.list[0].main.feels_like,
           temp: result.list[0].main.temp,
-          list: result.list
+          list: result.list.slice(1)
         });
-      }
-    });
+      
+    }).catch(err => {
+        alert('Geçersiz bölge ismi girdiniz')
+      })
   }, [location]);
   return <> </>;
 }

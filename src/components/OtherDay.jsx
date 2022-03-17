@@ -13,16 +13,21 @@ function OtherDay({ data }) {
 
   const temp = Math.floor(data.main.temp)
 
+  const otherIcon = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+
 
   return (
-    <div className="">
-      <div className="bg-primary py-2 rounded text-light">
-        <span> <b>Saat : </b> {hours} </span>
+    <div className="mb-1 sm:w-1/4 p-1">
+      <div className="bg-slate-700 rounded text-light flex flex-col">
+        <span className="mx-auto text-white">  {hours} </span>
 
 
-        <span> <b>Gün : </b>{day}</span>
+        <span className="mx-auto text-white">{day}</span>
 
-        <span>  <b>Sıcaklık :</b> {temp}℃ </span>
+        <div className="flex mx-auto text-white items-center">
+          <span> {temp} </span>
+          <img src={otherIcon} className="w-7 h-7 ml-2 my-2 bg-slate-400 rounded-full" alt="" />
+        </div>
       </div>
     </div>
   )
